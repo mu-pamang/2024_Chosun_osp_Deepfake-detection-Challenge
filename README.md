@@ -1,0 +1,1 @@
+# 2024_Chosun_osp_Deepfake-detection
