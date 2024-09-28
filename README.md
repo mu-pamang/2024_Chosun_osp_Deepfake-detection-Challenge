@@ -30,7 +30,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 
 Setup description
 
-### Prerequisites
+## Prerequisites
 
 - Install [conda](https://docs.conda.io/en/latest/miniconda.html)
 - Create the  environment with *environment.yml*
