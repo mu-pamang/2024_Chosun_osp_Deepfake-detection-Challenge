@@ -11,8 +11,6 @@
   - [Scripts](#scripts)
 - [License](#license)
 - [Changelog](#changelog)
-- [Code Style](#code-style)
-- [Documentation](#documentation)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
@@ -57,9 +55,7 @@ Quick description of how to use the project or program.
 code to run the project
 ```
 
-### Scripts
 
-- List of usage scripts
 
 ## License
 
@@ -71,19 +67,9 @@ For more information about he license see the `LICENSE.md` file.
 All notable changes to this project will be documented
 in [CHANGELOG.md](https://gitlab.rackhost.hu/rackhost/wp-tudasbazis/-/blob/master/README.md).
 
-## Code Style
 
-The project adhere to the guidelines defined below:
 
-- Project versioning uses [Semantic Versioning 2.0.0](https://semver.org/)
-- Commits use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) style
 
-- Other code styles that the project adheres to
-
-## Documentation
-
-For a detailed explanation of the project please refer to
-the `/docs`.
 
 ## Contact
 
