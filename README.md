@@ -20,7 +20,7 @@
 
 This project is a deepfake detection challenge project conducted by the Chosun University Open Source SW Project.
 
-이 프로젝트는 조선대학교 오픈소스SW프로젝트에서 진행 딥페이크 탐지 챌린지 프로젝트 입니다.
+이 프로젝트는 조선대학교 오픈소스SW 프로젝트에서 진행되는 딥페이크 처리 챌린지 프로젝트입니다.
 
 
 ### Built With
