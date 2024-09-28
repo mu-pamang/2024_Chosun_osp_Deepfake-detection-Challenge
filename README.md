@@ -46,9 +46,9 @@ $
 
 If you just want to test the pre-trained models against your own videos or images:
 
-- [Video prediction notebook](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/notebook/Video%20prediction.ipynb)
-- [Image prediction notebook](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/notebook/Image%20prediction.ipynb)
-- [Image prediction with attention](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/notebook/Image%20prediction%20and%20attention.ipynb)
+- [Video prediction notebook]( )
+- [Image prediction notebook]( )
+- [Image prediction with attention]( )
 
 ## The whole pipeline
 
@@ -62,7 +62,7 @@ In `scripts/make_dataset.sh` the value of `DFDC_SRC` should point to the dir
 
 ## Celeb-DF (v2)
 
-Altough **we did not use this dataset in the paper**, we provide a script [index_celebdf.py](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/index_celebdf.py) to index the videos similarly to DFDC and FF++. Once you have the index, you can proceed with the pipeline starting from [extract_faces.py](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/extract_faces.py). You can also use the split `celebdf` during training/testing.
+Altough **we did not use this dataset in the paper**, we provide a script [index_celebdf.py]( ) to index the videos similarly to DFDC and FF++. Once you have the index, you can proceed with the pipeline starting from [extract_faces.py]( ). You can also use the split `celebdf` during training/testing.
 
 ## Train
 
@@ -79,9 +79,9 @@ If you want to train some models without lunching the script:
 
 ## Pretrained weights
 
-We also provide pretrained weights for all the architectures presented in the paper. Please refer to this [Dropbox link](https://www.dropbox.com/sh/cesamx5ytd5j08c/AADG_eEmhskliMaT0Gbk-yHDa?dl=0). Each directory is named `$NETWORK_$DATASET` where `$NETWORK` is the architecture name and `$DATASET` is the training dataset. In each directory, you can find `bestval.pth` which are the best network weights according to the validation set.
+We also provide pretrained weights for all the architectures presented in the paper. Please refer to this [Google Drive link]( ). Each directory is named `$NETWORK_$DATASET` where `$NETWORK` is the architecture name and `$DATASET` is the training dataset. In each directory, you can find `bestval.pth` which are the best network weights according to the validation set.
 
-Additionally, you can find Jupyter notebooks for results computations in the [notebook](https://github.com/polimi-ispl/icpr2020dfdc/blob/master/notebook) folder.
+Additionally, you can find Jupyter notebooks for results computations in the [notebook]( ) folder.
 
 ## Datasets
 
