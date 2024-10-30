@@ -1,0 +1,26 @@
+# Python 관련 캐시 파일
+*.pyc
+*.pyo
+__pycache__/
+
+# 가상 환경 폴더
+venv/
+env/
+
+# 환경 변수 파일
+.env
+
+# Django 기본 데이터베이스 파일
+db.sqlite3
+
+# 미디어 업로드 파일 (예시)
+media/
+
+# IDE 관련 파일 및 설정 (예시로 VSCode와 PyCharm 추가)
+.vscode/
+.idea/
+
+# macOS에서 생성되는 시스템 파일
+.DS_Store
+.DS_Store
+env/
