@@ -23,7 +23,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 ### Built With
 
 - Python 3.12.2 64-bit
-- 
+- Django 5.1.2
 
 ## Getting Started
 
@@ -122,7 +122,7 @@ in [CHANGELOG.md](https://gitlab.rackhost.hu/rackhost/wp-tudasbazis/-/blob/maste
 
 Yoon Hyejun -  [hj021313@gmail.com](hj021313@gmail.com)
 
-Kim  - 
+Kim Minseo - [iminseo031224@gamil.com](iminseo031224@gmail.com)
 
 Kim  -
 
