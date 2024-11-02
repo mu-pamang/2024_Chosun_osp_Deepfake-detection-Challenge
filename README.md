@@ -22,7 +22,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 
 ### Built With
 
-- Python 3.12.2 64-bit
+- Python 3.10 64-bit
 - Django 5.1.2
 
 ## Getting Started
@@ -59,9 +59,6 @@ Also, please note that **for the DFDC** we have resorted to *the training spl
 
 In `scripts/make_dataset.sh` the value of `DFDC_SRC` should point to the directory containing the DFDC train split.
 
-## Celeb-DF (v2)
-
-Altough **we did not use this dataset in the paper**, we provide a script [index_celebdf.py]( ) to index the videos similarly to DFDC and FF++. Once you have the index, you can proceed with the pipeline starting from [extract_faces.py]( ). You can also use the split `celebdf` during training/testing.
 
 ## Train
 
@@ -85,13 +82,12 @@ Additionally, you can find Jupyter notebooks for results computations in the [n
 ## Datasets
 
 - [Facebook's DeepFake Detection Challenge (DFDC) train dataset](https://www.kaggle.com/c/deepfake-detection-challenge/data) | [arXiv paper](https://arxiv.org/abs/2006.07397)
-- [FaceForensics++](https://github.com/ondyari/FaceForensics/blob/master/dataset/README.md) | [arXiv paper](https://arxiv.org/abs/1901.08971)
-- [Celeb-DF (v2)](http://www.cs.albany.edu/~lsw/celeb-deepfakeforensics.html) | [arXiv paper](https://arxiv.org/abs/1909.12962) (**Just for reference, not used in the paper**)
+
 
 ## References
 
 - [EfficientNet PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
-- [Xception PyTorch](https://github.com/tstandley/Xception-PyTorch)
+
 
 ## How to cite
 
