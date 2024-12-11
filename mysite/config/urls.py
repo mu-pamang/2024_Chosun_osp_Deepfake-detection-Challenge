@@ -17,10 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
+from deepfake_detection import views  # views 임포트
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('deepfake/', include('deepfake_detection.urls')),
-    path('', lambda request: redirect('deepfake/', permanent=False)),  # 기본 경로를 'deepfake/'로 리디렉션
+    path('', views.home, name='home'),  # 루트 URL '/'에 home 뷰를 연결
+     path('deepfake_detect/', include('deepfake_detection.urls')),
 ]

@@ -1,16 +1,15 @@
-<!-- deepfake_detection/templates/deepfake_detection/home.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2024_Chosun_osp_Deepfake detection challenge</title>
     <link rel="stylesheet" href="{% static 'deepfake_detection/style.css' %}">
 </head>
 <body>
     <header>
-        <div class = "logo">Deepfake Detection</div>
+        <div class="logo">Deepfake Detection</div>
     </header>
 
     <main>
@@ -19,12 +18,14 @@
             conducted by the Chosun University open source SW project.</p>
         <p>비디오 파일을 업로드 하여 딥페이크 여부를 확인해보세요.</p>
 
-        <form id = "upload-form">
-            <input type = "file" id = "video-input" naem = "video" accept = "video/*" required>
-            <button type = "submit">분석하기</button>
+        <!-- CSRF 토큰 포함 및 method="post", enctype="multipart/form-data" 추가 -->
+        <form id="upload-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id="video-input" name="video" accept="video/*" required>
+            <button type="submit">분석하기</button>
         </form>
         
-        <div id = "result"></div>
+        <div id="result"></div>
     </main>
 
     <script src="{% static 'deepfake_detection/script.js' %}"></script>
