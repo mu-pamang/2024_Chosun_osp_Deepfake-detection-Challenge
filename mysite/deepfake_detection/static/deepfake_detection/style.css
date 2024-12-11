@@ -1,25 +1,113 @@
-body {
+/* <!--html, css 분리하여 연결할 코드 => 안돌아감 --> */
+/* Global styling */
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
-    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
 }
 
 h1 {
-    margin-top: 20px;
+    font-size: 24px;
+    color: #333333;
+    margin: 0;
 }
 
-form {
-    margin-top: 20px;
+p {
+    color: #666666;
+    margin: 5px 0 0;
 }
 
-#result {
+.container {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.instructions {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.upload-box {
+    background-color: #EBEBEB;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 45%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-box span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #292929;
+    align-self: flex-start;
+}
+
+#file-name {
+    font-size: 14px;
+    color: #555;
+    margin-right: 10px;
+}
+
+.edit-btn, .clear-btn, .submit-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #ff9933;
+    border: none;
+    color: white;
+}
+
+.clear-btn {
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+}
+
+.submit-btn {
+    background-color: #ff9933;
+    color: white;
+    border: none;
+}
+
+video {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+footer {
     margin-top: 20px;
-    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    color: #666;
+}
+
+.footer-text strong {
     font-weight: bold;
-}
+} */
