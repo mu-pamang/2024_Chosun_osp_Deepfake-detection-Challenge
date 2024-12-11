@@ -125,3 +125,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_COOKIE_SECURE = False  # 개발 중에는 False로 설정 (배포 시 True로 설정)
+CSRF_COOKIE_HTTPONLY = False
