@@ -98,6 +98,3 @@ document.getElementById('clear-btn').addEventListener('click', function () {
     emptyVideoBox.style.display = 'flex';
     resultDiv.innerHTML = '<h2>Upload a video to see the detection result.</h2>';
 });
-
-
-
