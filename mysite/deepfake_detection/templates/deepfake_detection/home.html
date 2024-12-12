@@ -1,4 +1,5 @@
-{% load static %}
+<!--html, css 분리하여 연결할 코드 => 안돌아감 -->
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
 
         <div class="upload-section">
             <!-- Left box for input video -->
-            <div class="upload-box input-box">
+            <div id="input-box" class="upload-box">
                 <span>Input video</span>
                 <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
                     <span id="file-name">No file selected</span>
@@ -35,7 +36,7 @@
             </div>
 
             <!-- Right box for output -->
-            <div class="upload-box output-box">
+            <div id="output-box" class="upload-box">
                 <span>OUTPUT</span>
                 <div id="output-area">Detection results will appear here.</div>
             </div>
@@ -48,6 +49,126 @@
         </footer>
     </div>
 
-    <script src="{% static 'deepfake_detection/script.js' %}"></script>
+    <script>
+        function previewVideo(event) {
+            const video = document.getElementById('video-preview');
+            const fileNameSpan = document.getElementById('file-name');
+            const fileInput = event.target.files[0];
+
+            if (fileInput) {
+                video.src = URL.createObjectURL(fileInput);
+                video.load();
+                video.play();
+                fileNameSpan.textContent = fileInput.name; // Display selected file name
+                adjustInputBoxHeight();
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('video-preview').src = "";
+            document.querySelector('.video-input').value = "";
+            document.getElementById('output-area').innerHTML = "Detection results will appear here.";
+            document.getElementById('file-name').textContent = "No file selected"; // Reset file name
+            adjustInputBoxHeight(); // Reset the height of the input box
+        }
+
+        function submitVideo() {
+            document.getElementById('output-area').innerHTML = "Processing video...";
+        }
+
+        function adjustInputBoxHeight() {
+            const video = document.getElementById('video-preview');
+            const inputBox = document.getElementById('input-box');
+
+            // Adjust input box height to match video height dynamically
+            const videoHeight = video.clientHeight || 380; // Default height if video is not loaded
+            const totalHeight = videoHeight + 120; // Include padding and other elements
+            inputBox.style.height = totalHeight + 'px';
+        }
+
+        // Adjust height on window resize
+        window.addEventListener('resize', adjustInputBoxHeight);
+    </script>
 </body>
-</html>
+</html> {% endcomment %}
+
+
+
+<!--html + css 합쳐놓은 코드 => 돌아감 -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024_Chosun_osp_Deepfake Detection Challenge</title>
+    <link rel="stylesheet" href="{% static 'deepfake_detection/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>2024_Chosun_OSP_Deepfake Detection Challenge</h1>
+        <p>This project is a deepfake detection challenge project conducted by the Chosun University Open Source SW project.</p>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <p>비디오 파일을 업로드 해서 딥페이크 여부를 확인해보세요.</p>
+        </div>
+
+        <div class="upload-section" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+            <!-- Left box for input video -->
+            <div class="upload-box input-box" style="background-color: #EBEBEB; width: 45%; display: flex; flex-direction: column; align-items: center; padding: 10px; height: 480px;">
+                <span style="font-size: 18px; color: #292929; align-self: flex-start; font-weight: 600;">Input video</span>
+                <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
+                    <span id="file-name" style="font-size: 14px; color: #555; margin-right: 10px;">No file selected</span>
+                    <button class="edit-btn" style="background-color: #ff9933; border: none; border-radius: 4px; padding: 5px 10px; color: white; cursor: pointer; font-weight: 600;" onclick="document.querySelector('.video-input').click();">EDIT</button>
+                </div>
+                <input type="file" accept="video/*" class="video-input" onchange="previewVideo(event)" style="display: none;">
+                <video id="video-preview" controls style="width: 100%; height: auto; margin-top: 10px; border: 1px solid #ccc;"></video>
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%; margin-top: 10px;">
+                    <button class="clear-btn" onclick="clearAll()" style="background-color: #FFFFFF; border: 1px solid #ccc; border-radius: 4px; padding: 10px 20px; cursor: pointer; font-size: 14px; width: 45%; font-weight: 600;">CLEAR</button>
+                    <button class="submit-btn" onclick="submitVideo()" style="background-color: #ff9933; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; font-size: 14px; width: 45%; font-weight: 600;">SUBMIT</button>
+                </div>
+            </div>
+
+            <!-- Right box for output -->
+            <div class="upload-box output-box" style="background-color: #EBEBEB; width: 45%; display: flex; flex-direction: column; align-items: center; padding: 10px; height: 480px;">
+                <span style="font-size: 18px; color: #292929; align-self: flex-start; font-weight: 600;">OUTPUT</span>
+                <div id="output-area" style="margin-top: 10px; border: 1px solid #ccc; width: 95%; height: 380px; overflow-y: auto; padding: 10px; text-align: center; color: #999;">Detection results will appear here.</div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 20px; text-align: center; padding-top: 20px;">
+            <div class="footer-text" style="margin-top: 10px; color: #666;">
+                <span>Powered by <strong>2 Group</strong></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function previewVideo(event) {
+            const video = document.getElementById('video-preview');
+            const fileNameSpan = document.getElementById('file-name');
+            const fileInput = event.target.files[0];
+
+            if (fileInput) {
+                video.src = URL.createObjectURL(fileInput);
+                video.load();
+                video.play();
+                fileNameSpan.textContent = fileInput.name; // Display selected file name
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('video-preview').src = "";
+            document.querySelector('.video-input').value = "";
+            document.getElementById('output-area').innerHTML = "Detection results will appear here.";
+            document.getElementById('file-name').textContent = "No file selected"; // Reset file name
+        }
+
+        function submitVideo() {
+            document.getElementById('output-area').innerHTML = "Processing video...";
+        }
+    </script>
+</body>
+</html> 
