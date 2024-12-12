@@ -37,6 +37,30 @@
 //     });
 // });
 
+function previewVideo(event) {
+    const video = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const fileInput = event.target.files[0];
+
+    if (fileInput) {
+        video.src = URL.createObjectURL(fileInput);
+        video.load();
+        video.play();
+        fileNameSpan.textContent = fileInput.name; // Display selected file name
+    }
+}
+
+function clearAll() {
+    document.getElementById('video-preview').src = "";
+    document.querySelector('.video-input').value = "";
+    document.getElementById('output-area').innerHTML = "Detection results will appear here.";
+    document.getElementById('file-name').textContent = "No file selected"; // Reset file name
+}
+
+function submitVideo() {
+    document.getElementById('output-area').innerHTML = "Processing video...";
+}
+
 
 document.getElementById('upload-form').addEventListener('submit', function (e) {
     e.preventDefault(); // 폼 제출 방지
