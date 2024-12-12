@@ -1,37 +1,21 @@
-/* <!--html, css 분리하여 연결할 코드 => 안돌아감 --> */
-/* Global styling */
-/* body {
+body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
     margin: 0;
     padding: 0;
+    background-color: #F9F9F9;
 }
 
 .header {
     text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ccc;
-}
-
-h1 {
-    font-size: 24px;
-    color: #333333;
-    margin: 0;
-}
-
-p {
-    color: #666666;
-    margin: 5px 0 0;
+    /* background-color: #292929; */
+    color: #292929;
+    padding: 20px 0;
 }
 
 .container {
-    margin: 20px auto;
     max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
 .instructions {
@@ -48,32 +32,30 @@ p {
 
 .upload-box {
     background-color: #EBEBEB;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
     width: 45%;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
+    height: 480px;
 }
 
 .upload-box span {
     font-size: 18px;
-    font-weight: 600;
     color: #292929;
     align-self: flex-start;
+    font-weight: 600;
 }
 
 #file-name {
-    font-size: 14px;
-    color: #555;
-    margin-right: 10px;
+    font-weight: 300;
+    margin-right: 20px;
+    padding-top: 10px;
 }
 
-.edit-btn, .clear-btn, .submit-btn {
-    padding: 10px 20px;
+.edit-btn, .submit-btn, .clear-btn {
     border-radius: 4px;
+    padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -81,13 +63,8 @@ p {
 
 .edit-btn {
     background-color: #ff9933;
-    border: none;
     color: white;
-}
-
-.clear-btn {
-    background-color: #FFFFFF;
-    border: 1px solid #ccc;
+    border: none;
 }
 
 .submit-btn {
@@ -96,18 +73,33 @@ p {
     border: none;
 }
 
-video {
+.clear-btn {
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    color: #292929;
+}
+
+#video-preview {
     width: 100%;
+    height: auto;
+    margin-top: 10px;
     border: 1px solid #ccc;
 }
 
-footer {
-    margin-top: 20px;
+#output-area {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    width: 95%;
+    height: 380px;
+    overflow-y: auto;
+    padding: 10px;
     text-align: center;
-    padding-top: 10px;
-    color: #666;
+    color: #999;
 }
 
-.footer-text strong {
-    font-weight: bold;
-} */
+.footer-text {
+    margin-top: 10px;
+    color: #666;
+    text-align: center;
+    padding-top: 20px;
+}
