@@ -47,6 +47,12 @@ body {
     font-weight: 600;
 }
 
+#file-name {
+    font-weight: 300;
+    margin-right: 20px;
+    padding-top: 10px;
+}
+
 .edit-btn, .submit-btn, .clear-btn {
     border-radius: 4px;
     padding: 10px 20px;
