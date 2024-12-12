@@ -1,31 +1,52 @@
-<!-- deepfake_detection/templates/deepfake_detection/home.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
-    <title>2024_Chosun_osp_Deepfake detection challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024_Chosun_osp_Deepfake Detection Challenge</title>
     <link rel="stylesheet" href="{% static 'deepfake_detection/style.css' %}">
 </head>
 <body>
-    <header>
-        <div class = "logo">Deepfake Detection</div>
-    </header>
+    <div class="header">
+        <h1>2024_Chosun_OSP_Deepfake Detection Challenge</h1>
+        <p>This project is a deepfake detection challenge project conducted by the Chosun University Open Source SW project.</p>
+    </div>
 
-    <main>
-        <h1>2024_Chosun_osp_Deepfake Detection Challenge</h1>
-        <p>This project is a deepfake detection challenge project 
-            conducted by the Chosun University open source SW project.</p>
-        <p>비디오 파일을 업로드 하여 딥페이크 여부를 확인해보세요.</p>
+    <div class="container">
+        <div class="instructions">
+            <p>비디오 파일을 업로드 해서 딥페이크 여부를 확인해보세요.</p>
+        </div>
 
-        <form id = "upload-form">
-            <input type = "file" id = "video-input" naem = "video" accept = "video/*" required>
-            <button type = "submit">분석하기</button>
-        </form>
-        
-        <div id = "result"></div>
-    </main>
+        <div class="upload-section">
+            <!-- Left box for input video -->
+            <div class="upload-box input-box">
+                <span>Input video</span>
+                <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
+                    <span id="file-name">No file selected</span>
+                    <button class="edit-btn" onclick="document.querySelector('.video-input').click();">EDIT</button>
+                </div>
+                <input type="file" accept="video/*" class="video-input" onchange="previewVideo(event)" style="display: none;">
+                <video id="video-preview" controls></video>
+                <div style="display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;">
+                    <button class="clear-btn" onclick="clearAll()">CLEAR</button>
+                    <button class="submit-btn" onclick="submitVideo()">SUBMIT</button>
+                </div>
+            </div>
+
+            <!-- Right box for output -->
+            <div class="upload-box output-box">
+                <span>OUTPUT</span>
+                <div id="output-area">Detection results will appear here.</div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-text">
+                <span>Powered by <strong>2 Group</strong></span>
+            </div>
+        </footer>
+    </div>
 
     <script src="{% static 'deepfake_detection/script.js' %}"></script>
 </body>
