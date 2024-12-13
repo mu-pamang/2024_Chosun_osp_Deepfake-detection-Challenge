@@ -21,14 +21,14 @@
         <div class="upload-section">
             <!-- Left box for input video -->
             <div class="upload-box input-box">
-                <span>Input video</span>
+                <span>Input Video</span>
                 <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
                     <span id="file-name">No file selected</span>
                     <button class="edit-btn" onclick="document.querySelector('.video-input').click();">EDIT</button>
                 </div>
                 <input type="file" accept="video/*" class="video-input" onchange="previewVideo(event)" style="display: none;">
                 <video id="video-preview" controls></video>
-                <div style="display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;">
+                <div style="display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 20px;">
                     <button class="clear-btn" onclick="clearAll()">CLEAR</button>
                     <button class="submit-btn" onclick="submitVideo()">SUBMIT</button>
                 </div>
@@ -36,7 +36,7 @@
 
             <!-- Right box for output -->
             <div class="upload-box output-box">
-                <span>OUTPUT</span>
+                <span>Output</span>
                 <div id="output-area">Detection results will appear here.</div>
             </div>
         </div>
