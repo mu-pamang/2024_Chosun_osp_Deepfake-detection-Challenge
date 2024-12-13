@@ -18,31 +18,28 @@
             <p>비디오 파일을 업로드 해서 딥페이크 여부를 확인해보세요.</p>
         </div>
 
-        <!-- Upload form -->
-        <form id="upload-form">
-            <div class="upload-section">
-                <!-- Left box for input video -->
-                <div class="upload-box input-box">
-                    <span>Input video</span>
-                    <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
-                        <span id="file-name">No file selected</span>
-                        <button type="button" class="edit-btn" id="edit-btn">EDIT</button>
-                    </div>
-                    <input type="file" id="video-input" accept="video/*" style="display: none;">
-                    <video id="video-preview" controls></video>
-                    <div style="display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;">
-                        <button type="button" class="clear-btn" id="clear-btn">CLEAR</button>
-                        <button type="submit" class="submit-btn" id="submit-btn">SUBMIT</button>
-                    </div>
+        <div class="upload-section">
+            <!-- Left box for input video -->
+            <div class="upload-box input-box">
+                <span>Input video</span>
+                <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 10px;">
+                    <span id="file-name">No file selected</span>
+                    <button class="edit-btn" onclick="document.querySelector('.video-input').click();">EDIT</button>
                 </div>
-
-                <!-- Right box for output -->
-                <div class="upload-box output-box">
-                    <span>OUTPUT</span>
-                    <div id="output-area">Detection results will appear here.</div>
+                <input type="file" accept="video/*" class="video-input" onchange="previewVideo(event)" style="display: none;">
+                <video id="video-preview" controls></video>
+                <div style="display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;">
+                    <button class="clear-btn" onclick="clearAll()">CLEAR</button>
+                    <button class="submit-btn" onclick="submitVideo()">SUBMIT</button>
                 </div>
             </div>
-        </form>
+
+            <!-- Right box for output -->
+            <div class="upload-box output-box">
+                <span>OUTPUT</span>
+                <div id="output-area">Detection results will appear here.</div>
+            </div>
+        </div>
 
         <footer>
             <div class="footer-text">
@@ -51,6 +48,6 @@
         </footer>
     </div>
 
-    <script src="{% static 'deepfake_detection/script.js' %}" defer></script>
+    <script src="{% static 'deepfake_detection/script.js' %}"></script>
 </body>
 </html>

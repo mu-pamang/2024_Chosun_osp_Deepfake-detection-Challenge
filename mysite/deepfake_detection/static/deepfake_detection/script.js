@@ -156,7 +156,7 @@ function submitVideo() {
     outputArea.textContent = "Processing video...";
 } */
 
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
     // DOM 요소 가져오기
     const videoInput = document.getElementById('video-input');
     const videoPreview = document.getElementById('video-preview');
@@ -234,4 +234,99 @@ document.addEventListener('DOMContentLoaded', function () {
         fileNameSpan.textContent = 'No file selected'; // 파일 이름 초기화
         outputArea.textContent = 'Detection results will appear here.'; // 출력 영역 초기화
     }
+}); */
+
+// Form 제출 이벤트 핸들러
+document.getElementById('upload-form').addEventListener('submit', function (e) {
+    e.preventDefault(); // 기본 폼 제출 방지
+
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const videoInput = document.getElementById('video-input');
+    const videoPreview = document.getElementById('uploaded-video');
+    const emptyVideoBox = document.getElementById('empty-video-box');
+    const resultDiv = document.getElementById('result');
+
+    // 비디오 파일 선택 여부 확인
+    if (videoInput.files.length === 0) {
+        alert('비디오 파일을 선택해주세요.');
+        return;
+    }
+
+    // FormData 생성 및 비디오 파일 추가
+    const formData = new FormData();
+    formData.append('video', videoInput.files[0]);
+
+    // 비디오 미리보기 업데이트
+    updateVideoPreview(videoInput.files[0], videoPreview, emptyVideoBox);
+
+    // 결과 영역 초기화
+    resultDiv.innerHTML = '<h2>분석 중입니다... 잠시만 기다려주세요.</h2>';
+
+    // 비디오 업로드 및 결과 처리
+    fetch('/upload/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+        },
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => handleUploadResult(data, resultDiv))
+        .catch((error) => handleUploadError(error, resultDiv));
 });
+
+// Clear 버튼 클릭 이벤트 핸들러
+document.getElementById('clear-btn').addEventListener('click', clearForm);
+
+// 비디오 미리보기 업데이트 함수
+function updateVideoPreview(file, videoPreview, emptyVideoBox) {
+    videoPreview.src = URL.createObjectURL(file);
+    videoPreview.style.display = 'block';
+    emptyVideoBox.style.display = 'none';
+}
+
+// 업로드 결과 처리 함수
+function handleUploadResult(data, resultDiv) {
+    if (data.label && data.confidence) {
+        resultDiv.innerHTML = `
+            <h2>${data.label}</h2>
+            <div>Confidence: ${data.confidence}%</div>
+        `;
+    } else if (data.error) {
+        resultDiv.innerHTML = `<h2>Error: ${data.error}</h2>`;
+    }
+}
+
+// 업로드 에러 처리 함수
+function handleUploadError(error, resultDiv) {
+    console.error('Error:', error);
+    resultDiv.innerHTML = '<h2>서버에 오류가 발생했습니다.</h2>';
+}
+
+// Clear 버튼 동작 함수
+function clearForm() {
+    const videoInput = document.getElementById('video-input');
+    const videoPreview = document.getElementById('uploaded-video');
+    const emptyVideoBox = document.getElementById('empty-video-box');
+    const resultDiv = document.getElementById('result');
+
+    videoInput.value = '';
+    videoPreview.src = '';
+    videoPreview.style.display = 'none';
+    emptyVideoBox.style.display = 'flex';
+    resultDiv.innerHTML = '<h2>Upload a video to see the detection result.</h2>';
+}
+
+// 독립적으로 사용할 수 있는 비디오 프리뷰 함수
+function previewVideo(event) {
+    const video = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const fileInput = event.target.files[0];
+
+    if (fileInput) {
+        video.src = URL.createObjectURL(fileInput);
+        video.load();
+        video.play();
+        fileNameSpan.textContent = fileInput.name; // 선택한 파일 이름 표시
+    }
+}
