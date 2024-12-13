@@ -236,15 +236,52 @@ function submitVideo() {
     }
 }); */
 
+// Chart.js로 막대그래프 초기화
+let barChart = null;
+
+function initializeChart() {
+    const ctx = document.getElementById('bar-chart').getContext('2d');
+    barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Real', 'Fake'], // X축 레이블
+            datasets: [{
+                label: 'Confidence (%)',
+                data: [0, 0], // 초기 데이터
+                backgroundColor: ['#4CAF50', '#FF5722'], // Real: Green, Fake: Red
+                borderColor: ['#388E3C', '#E64A19'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100 // Y축 최대값
+                }
+            }
+        }
+    });
+}
+
+// 그래프 데이터 업데이트
+function updateChart(realConfidence, fakeConfidence) {
+    if (barChart) {
+        barChart.data.datasets[0].data = [realConfidence, fakeConfidence];
+        barChart.update();
+    }
+}
+
 // Form 제출 이벤트 핸들러
 document.getElementById('upload-form').addEventListener('submit', function (e) {
     e.preventDefault(); // 기본 폼 제출 방지
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const videoInput = document.getElementById('video-input');
-    const videoPreview = document.getElementById('uploaded-video');
-    const emptyVideoBox = document.getElementById('empty-video-box');
-    const resultDiv = document.getElementById('result');
+    const videoPreview = document.getElementById('video-preview');
+    const resultDiv = document.getElementById('output-area');
 
     // 비디오 파일 선택 여부 확인
     if (videoInput.files.length === 0) {
@@ -257,7 +294,7 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
     formData.append('video', videoInput.files[0]);
 
     // 비디오 미리보기 업데이트
-    updateVideoPreview(videoInput.files[0], videoPreview, emptyVideoBox);
+    updateVideoPreview(videoInput.files[0], videoPreview);
 
     // 결과 영역 초기화
     resultDiv.innerHTML = '<h2>분석 중입니다... 잠시만 기다려주세요.</h2>';
@@ -275,45 +312,68 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
         .catch((error) => handleUploadError(error, resultDiv));
 });
 
-// Clear 버튼 클릭 이벤트 핸들러
-document.getElementById('clear-btn').addEventListener('click', clearForm);
+// EDIT 버튼 클릭 이벤트 핸들러
+document.getElementById('edit-btn').addEventListener('click', function () {
+    document.getElementById('video-input').click();
+});
 
-// 동영상 높이에 따라 박스 높이 조정 함수
-function adjustBoxHeight() {
-    const video = document.getElementById('video-preview'); // 동영상 요소
-    const inputBox = document.querySelector('.input-box'); // 배경 박스 요소
+// CLEAR 버튼 클릭 이벤트 핸들러
+document.getElementById('clear-btn').addEventListener('click', function () {
+    const videoInput = document.getElementById('video-input');
+    const videoPreview = document.getElementById('video-preview');
+    const resultDiv = document.getElementById('output-area');
 
-    if (video && inputBox) {
-        const videoHeight = video.videoHeight; // 동영상 높이 가져오기
-        const videoWidth = video.videoWidth;  // 동영상 너비 가져오기
+    // 초기화 작업: 비디오 유지하며 파일만 삭제
+    videoInput.value = '';
+    videoPreview.src = '';
+    resultDiv.innerHTML = '<h2>Detection results will appear here.</h2>';
 
-        // 동영상 높이가 유효하면 배경 박스 높이를 동영상 높이에 맞춤
-        if (videoHeight && videoWidth) {
-            const adjustedHeight = videoHeight / videoWidth * inputBox.offsetWidth; // 비율에 따라 높이 계산
-            inputBox.style.height = `${adjustedHeight}px`; // 배경 박스 높이 설정
-        }
+    // 그래프 초기화
+    updateChart(0, 0);
+});
+
+// 비디오 미리보기 업데이트 함수
+function updateVideoPreview(file, videoPreview) {
+    if (file) {
+        const fileURL = URL.createObjectURL(file); // 파일의 임시 URL 생성
+        videoPreview.src = fileURL; // 비디오 미리보기 src 설정
+        videoPreview.style.display = 'block'; // 비디오 태그 표시
+        videoPreview.load(); // 비디오 로드
+    } else {
+        videoPreview.src = ''; // 파일이 없으면 src 초기화
+        videoPreview.style.display = 'none'; // 비디오 태그 숨김
     }
 }
 
-// 동영상 로드 또는 변경 시 높이 조정
-const videoElement = document.getElementById('video-preview');
-videoElement.addEventListener('loadedmetadata', adjustBoxHeight); // 동영상 메타데이터 로드 시 호출
-window.addEventListener('resize', adjustBoxHeight); // 창 크기 변경 시 호출
+// 비디오 파일 선택 시 호출
+document.getElementById('video-input').addEventListener('change', function (event) {
+    const videoPreview = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const file = event.target.files[0];
 
-// 비디오 미리보기 업데이트 함수
-function updateVideoPreview(file, videoPreview, emptyVideoBox) {
-    videoPreview.src = URL.createObjectURL(file);
-    videoPreview.style.display = 'block';
-    emptyVideoBox.style.display = 'none';
-}
+    if (file) {
+        updateVideoPreview(file, videoPreview); // 비디오 미리보기 업데이트
+        fileNameSpan.textContent = file.name; // 선택된 파일 이름 표시
+    } else {
+        fileNameSpan.textContent = 'No file selected'; // 파일이 선택되지 않으면 기본 메시지 표시
+    }
+});
 
 // 업로드 결과 처리 함수
 function handleUploadResult(data, resultDiv) {
     if (data.label && data.confidence) {
+        const realConfidence = data.label === 'Real' ? data.confidence : 100 - data.confidence;
+        const fakeConfidence = 100 - realConfidence;
+
+        // 결과 텍스트 업데이트
         resultDiv.innerHTML = `
             <h2>${data.label}</h2>
-            <div>Confidence: ${data.confidence}%</div>
+            <div>Real: ${realConfidence.toFixed(2)}%</div>
+            <div>Fake: ${fakeConfidence.toFixed(2)}%</div>
         `;
+
+        // 그래프 업데이트
+        updateChart(realConfidence, fakeConfidence);
     } else if (data.error) {
         resultDiv.innerHTML = `<h2>Error: ${data.error}</h2>`;
     }
@@ -325,30 +385,53 @@ function handleUploadError(error, resultDiv) {
     resultDiv.innerHTML = '<h2>서버에 오류가 발생했습니다.</h2>';
 }
 
-// Clear 버튼 동작 함수
-function clearForm() {
-    const videoInput = document.getElementById('video-input');
-    const videoPreview = document.getElementById('uploaded-video');
-    const emptyVideoBox = document.getElementById('empty-video-box');
-    const resultDiv = document.getElementById('result');
-
-    videoInput.value = '';
-    videoPreview.src = '';
-    videoPreview.style.display = 'none';
-    emptyVideoBox.style.display = 'flex';
-    resultDiv.innerHTML = '<h2>Upload a video to see the detection result.</h2>';
-}
-
-// 독립적으로 사용할 수 있는 비디오 프리뷰 함수
-function previewVideo(event) {
+// 동영상 높이에 따라 박스 높이 조정 함수
+function adjustBoxHeight() {
     const video = document.getElementById('video-preview');
-    const fileNameSpan = document.getElementById('file-name');
-    const fileInput = event.target.files[0];
+    const inputBox = document.querySelector('.input-box');
 
-    if (fileInput) {
-        video.src = URL.createObjectURL(fileInput);
-        video.load();
-        video.play();
-        fileNameSpan.textContent = fileInput.name; // 선택한 파일 이름 표시
+    if (video.videoHeight && video.videoWidth) {
+        const aspectRatio = video.videoHeight / video.videoWidth;
+        inputBox.style.height = `${inputBox.offsetWidth * aspectRatio}px`; // 비율에 맞게 높이 조정
+    } else {
+        inputBox.style.height = 'auto'; // 기본 높이로 초기화
     }
 }
+
+// 동영상 로드 또는 변경 시 높이 조정
+document.getElementById('video-preview').addEventListener('loadedmetadata', adjustBoxHeight);
+window.addEventListener('resize', adjustBoxHeight);
+
+// 페이지 로드 시 그래프 초기화
+document.addEventListener('DOMContentLoaded', initializeChart);
+
+function adjustBoxHeight() {
+    const video = document.getElementById('video-preview'); // 동영상 요소
+    const inputBox = document.querySelector('.input-box'); // 배경 박스 요소
+
+    if (video && inputBox) {
+        video.addEventListener('loadedmetadata', () => {
+            // 동영상의 높이와 너비를 가져옴
+            const videoHeight = video.videoHeight;
+            const videoWidth = video.videoWidth;
+
+            // 비율에 따라 배경 박스 높이 조정
+            if (videoHeight && videoWidth) {
+                const boxHeight = (videoHeight / videoWidth) * inputBox.offsetWidth;
+                inputBox.style.height = `${boxHeight + 100}px`; // 여유 공간 추가
+            }
+        });
+    }
+}
+
+// 동영상 파일 변경 시 호출
+document.getElementById('video-input').addEventListener('change', function (event) {
+    const videoPreview = document.getElementById('video-preview');
+    const file = event.target.files[0];
+
+    if (file) {
+        videoPreview.src = URL.createObjectURL(file); // 동영상 미리보기 URL 생성
+        videoPreview.style.display = 'block'; // 동영상 표시
+        adjustBoxHeight(); // 동영상 높이에 따라 박스 조정
+    }
+});
