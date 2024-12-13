@@ -37,8 +37,7 @@
 //     });
 // });
 
-
-document.getElementById('upload-form').addEventListener('submit', function (e) {
+/* document.getElementById('upload-form').addEventListener('submit', function (e) {
     e.preventDefault(); // 폼 제출 방지
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -97,4 +96,142 @@ document.getElementById('clear-btn').addEventListener('click', function () {
     videoPreview.style.display = 'none';
     emptyVideoBox.style.display = 'flex';
     resultDiv.innerHTML = '<h2>Upload a video to see the detection result.</h2>';
+});
+
+function previewVideo(event) {
+    const video = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const fileInput = event.target.files[0];
+
+    if (fileInput) {
+        video.src = URL.createObjectURL(fileInput);
+        video.load();
+        video.play();
+        fileNameSpan.textContent = fileInput.name; // Display selected file name
+    }
+}
+
+function clearAll() {
+    document.getElementById('video-preview').src = "";
+    document.querySelector('.video-input').value = "";
+    document.getElementById('output-area').innerHTML = "Detection results will appear here.";
+    document.getElementById('file-name').textContent = "No file selected"; // Reset file name
+}
+
+function submitVideo() {
+    document.getElementById('output-area').innerHTML = "Processing video...";
+}
+
+
+function previewVideo(event) {
+    const video = document.getElementById('video-preview'); // 비디오 미리보기 엘리먼트
+    const fileNameSpan = document.getElementById('file-name'); // 선택한 파일 이름 표시
+    const fileInput = event.target.files[0]; // 업로드한 파일
+
+    if (fileInput) {
+        video.src = URL.createObjectURL(fileInput); // 로컬 미리보기 URL 생성
+        video.load();
+        video.play();
+        fileNameSpan.textContent = fileInput.name; // 선택한 파일 이름 업데이트
+    }
+}
+
+function clearAll() {
+    const video = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const outputArea = document.getElementById('output-area');
+    const videoInput = document.querySelector('.video-input');
+
+    // 미리보기 초기화
+    video.src = "";
+    videoInput.value = ""; // 파일 입력 초기화
+    fileNameSpan.textContent = "No file selected"; // 파일 이름 초기화
+    outputArea.textContent = "Detection results will appear here."; // 출력 영역 초기화
+}
+
+function submitVideo() {
+    const outputArea = document.getElementById('output-area');
+
+    // 제출 상태 알림
+    outputArea.textContent = "Processing video...";
+} */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // DOM 요소 가져오기
+    const videoInput = document.getElementById('video-input');
+    const videoPreview = document.getElementById('video-preview');
+    const fileNameSpan = document.getElementById('file-name');
+    const outputArea = document.getElementById('output-area');
+    const clearButton = document.getElementById('clear-btn');
+    const submitButton = document.getElementById('submit-btn');
+    const editButton = document.getElementById('edit-btn');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    
+    // 비디오 파일 선택 시 미리보기
+    videoInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            videoPreview.src = URL.createObjectURL(file);
+            videoPreview.load();
+            videoPreview.play();
+            fileNameSpan.textContent = file.name; // 파일 이름 표시
+            outputArea.textContent = "Detection results will appear here."; // 결과 초기화
+        } else {
+            clearAll();
+        }
+    });
+
+    // "EDIT" 버튼 클릭 시 파일 선택 창 열기
+    editButton.addEventListener('click', function () {
+        videoInput.click();
+    });
+    
+    // CLEAR 버튼 클릭 시 초기화
+    clearButton.addEventListener('click', function () {
+        clearAll();
+    });
+
+    // SUBMIT 버튼 클릭 시 서버로 파일 전송
+    submitButton.addEventListener('click', function () {
+        if (!videoInput.files.length) {
+            alert('비디오 파일을 선택해주세요.');
+            return;
+        }
+    
+        outputArea.textContent = 'Processing video...';
+
+        const formData = new FormData();
+        formData.append('video', videoInput.files[0]);
+
+        fetch('/upload/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken || '', // CSRF 토큰 추가
+            },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.label && data.confidence) {
+                    outputArea.innerHTML = `
+                        <h2>${data.label}</h2>
+                        <div>Confidence: ${data.confidence}%</div>
+                    `;
+                } else if (data.error) {
+                    outputArea.innerHTML = `<h2>Error: ${data.error}</h2>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                outputArea.textContent = '서버에 오류가 발생했습니다.';
+            });
+    });
+
+    // 모든 필드를 초기화하는 함수
+    function clearAll() {
+        videoPreview.src = ''; // 비디오 미리보기 초기화
+        videoInput.value = ''; // 파일 입력 초기화
+        fileNameSpan.textContent = 'No file selected'; // 파일 이름 초기화
+        outputArea.textContent = 'Detection results will appear here.'; // 출력 영역 초기화
+    }
 });
