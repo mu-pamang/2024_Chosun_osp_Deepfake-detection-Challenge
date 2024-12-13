@@ -278,6 +278,28 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
 // Clear 버튼 클릭 이벤트 핸들러
 document.getElementById('clear-btn').addEventListener('click', clearForm);
 
+// 동영상 높이에 따라 박스 높이 조정 함수
+function adjustBoxHeight() {
+    const video = document.getElementById('video-preview'); // 동영상 요소
+    const inputBox = document.querySelector('.input-box'); // 배경 박스 요소
+
+    if (video && inputBox) {
+        const videoHeight = video.videoHeight; // 동영상 높이 가져오기
+        const videoWidth = video.videoWidth;  // 동영상 너비 가져오기
+
+        // 동영상 높이가 유효하면 배경 박스 높이를 동영상 높이에 맞춤
+        if (videoHeight && videoWidth) {
+            const adjustedHeight = videoHeight / videoWidth * inputBox.offsetWidth; // 비율에 따라 높이 계산
+            inputBox.style.height = `${adjustedHeight}px`; // 배경 박스 높이 설정
+        }
+    }
+}
+
+// 동영상 로드 또는 변경 시 높이 조정
+const videoElement = document.getElementById('video-preview');
+videoElement.addEventListener('loadedmetadata', adjustBoxHeight); // 동영상 메타데이터 로드 시 호출
+window.addEventListener('resize', adjustBoxHeight); // 창 크기 변경 시 호출
+
 // 비디오 미리보기 업데이트 함수
 function updateVideoPreview(file, videoPreview, emptyVideoBox) {
     videoPreview.src = URL.createObjectURL(file);

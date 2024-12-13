@@ -29,6 +29,7 @@ body {
     gap: 20px;
 }
 
+/* 기본 박스 스타일 */
 .upload-box {
     background-color: #EBEBEB;
     width: 45%;
@@ -36,7 +37,17 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    height: 480px;
+    margin: 0 auto;
+    transition: height 0.3s ease; /* 높이 변경 시 애니메이션 */
+}
+
+/* 동영상의 높이에 맞춰 배경 박스를 동적으로 조정 */
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .upload-box span {
