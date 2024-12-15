@@ -300,16 +300,26 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
     resultDiv.innerHTML = '<h2>분석 중입니다... 잠시만 기다려주세요.</h2>';
 
     // 비디오 업로드 및 결과 처리
-    fetch('/upload/', {
+    fetch('https://182b-34-125-95-116.ngrok-free.app/upload/', {
         method: 'POST',
         headers: {
-            'X-CSRFToken': csrfToken,
+
         },
         body: formData,
+        credentials: 'omit'
     })
-        .then((response) => response.json())
-        .then((data) => handleUploadResult(data, resultDiv))
-        .catch((error) => handleUploadError(error, resultDiv));
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        handleUploadResult(data, resultDiv);
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error);
+        handleUploadError(error, resultDiv);
+    });
 });
 
 // EDIT 버튼 클릭 이벤트 핸들러
