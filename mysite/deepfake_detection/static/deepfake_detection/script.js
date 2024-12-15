@@ -300,7 +300,7 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
     resultDiv.innerHTML = '<h2>분석 중입니다... 잠시만 기다려주세요.</h2>';
 
     // 비디오 업로드 및 결과 처리
-    fetch('/upload/', {
+    fetch('https://7359-34-125-95-116.ngrok-free.app/upload/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,
