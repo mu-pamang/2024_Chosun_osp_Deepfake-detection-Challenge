@@ -73,7 +73,7 @@ def upload_file(request):
                 f.write(chunk)
 
         # 코랩 서버로 요청 보내기
-        colab_url = "https://7359-34-125-95-116.ngrok-free.app/predict"  # 코랩 서버 주소
+        colab_url = "https://182b-34-125-95-116.ngrok-free.app/predict"  # 코랩 서버 주소
         try:
             with open(temp_video_path, 'rb') as f:
                 response = requests.post(colab_url, files={'video': f})
