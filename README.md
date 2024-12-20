@@ -33,6 +33,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 - MTCNN (전처리)
 - BCEWithLogitsLoss (손실 함수)
 
+
 ## Getting Started
 
 Setup description
@@ -55,6 +56,7 @@ If you just want to test the pre-trained models against your own videos or image
 - [Image prediction notebook](https://colab.research.google.com/drive/1VRgV_5KhA8EZp0gQ6FNFki2GBGrAFAKO?usp=sharing)
 - [Image prediction with attention](https://colab.research.google.com/drive/1WFjqiLt1spXsaSo5CfAxeLZoZGLQIxBo?usp=sharing)
 
+
 ## The whole pipeline
 
 ### Pipeline Overview
@@ -66,19 +68,20 @@ $ ./
 ```
 
 
-
 ## Train
 ### Training a single model
 
 If you want to train some models without lunching the script:
 
 - [Training Notebook](https://colab.research.google.com/drive/17sQ3D3lnErrER7Tn8IVk_LhFIagQgSZB?usp=sharing)
+
   
 ## Test
 
 ### Pretrained weights
 We provide pretrained weights for all the architectures presented in the project. 
 Please refer to this [Google Drive link](https://drive.google.com/drive/folders/1UyjNHiUvE3yQG9Mq9hqvLXkuFlYp3-lq?usp=sharing)
+
 
 ## Datasets
 
@@ -112,6 +115,7 @@ Kim Minseo - [iminseo031224@gamil.com](iminseo031224@gmail.com)
 Kim Serin - [qnsghdakf8@gmail.com](qnsghdakf8@gmail.com)
 
 Project Link: [link to the project](https://leaf-geography-00e.notion.site/10e21cb154db809fa334d48c83df050e)
+
 
 ## Acknowledgements
 
