@@ -8,8 +8,12 @@
   - [Prerequisites](#prerequisites)
   - [Quick run](#quick-run)
   - [The whole pipeline](#the-whole-pipeline)
-- [License](#license)
-- [Changelog](#changelog)
+- [Train](#Train)
+  - [Training a single model](#Training_a_single_model)
+- [Test](#Test)
+  - [Pretrained weights](#Pretrained_weights)
+- [Datasets](#Datasets)
+- [References](#References)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
@@ -24,6 +28,10 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 
 - Python 3.10 64-bit
 - Django 5.1.2
+- EfficientNet b0
+- ConvNext Tiny
+- MTCNN (전처리)
+- BCEWithLogitsLoss (손실 함수)
 
 ## Getting Started
 
@@ -33,61 +41,54 @@ Setup description
 
 - Install [conda](https://docs.conda.io/en/latest/miniconda.html)
 - Create the  environment with *environment.yml*
-
 ```
 $ conda env create -f environment.yml
-$
 ```
+- Download and unzip the [datasets](https://drive.google.com/drive/folders/18qY34tdNIlYppLn1RmkdqlNsQh8QLKnj?usp=sharing)
 
-- Download and unzip the [datasets](https://www.kaggle.com/c/deepfake-detection-challenge/data)
 
 ## Quick run
 
 If you just want to test the pre-trained models against your own videos or images:
 
 - [Video prediction notebook]( )
-- [Image prediction notebook]( )
-- [Image prediction with attention]( )
+- [Image prediction notebook](https://colab.research.google.com/drive/1VRgV_5KhA8EZp0gQ6FNFki2GBGrAFAKO?usp=sharing)
+- [Image prediction with attention](https://colab.research.google.com/drive/1WFjqiLt1spXsaSo5CfAxeLZoZGLQIxBo?usp=sharing)
 
 ## The whole pipeline
 
+## Pipeline Overview
+- Model: EfficientNet b0, ConvNext Tiny
+- Preprocessing: MTCNN for face extraction
+- Loss Function: BCEWithLogitsLoss
 ```
 $ ./
 ```
 
-Also, please note that **for the DFDC** we have resorted to *the training split* exclusively!
-
-In `scripts/make_dataset.sh` the value of `DFDC_SRC` should point to the directory containing the DFDC train split.
 
 
 ## Train
-
 ## Training a single model
 
 If you want to train some models without lunching the script:
 
-- 
-- 
-    1. 
-    2. 
-
+- [Training Notebook](https://colab.research.google.com/drive/17sQ3D3lnErrER7Tn8IVk_LhFIagQgSZB?usp=sharing)
+  
 ## Test
 
 ## Pretrained weights
-
-We also provide pretrained weights for all the architectures presented in the paper. Please refer to this [Google Drive link]( ). Each directory is named `$NETWORK_$DATASET` where `$NETWORK` is the architecture name and `$DATASET` is the training dataset. In each directory, you can find `bestval.pth` which are the best network weights according to the validation set.
-
-Additionally, you can find Jupyter notebooks for results computations in the [notebook]( ) folder.
+We provide pretrained weights for all the architectures presented in the project. 
+Please refer to this [Google Drive link](https://drive.google.com/drive/folders/1UyjNHiUvE3yQG9Mq9hqvLXkuFlYp3-lq?usp=sharing)
 
 ## Datasets
 
-- [Facebook's DeepFake Detection Challenge (DFDC) train dataset](https://www.kaggle.com/c/deepfake-detection-challenge/data) | [arXiv paper](https://arxiv.org/abs/2006.07397)
+- [Deepfake Detection Challenge_(DFDC) train test_dataset](https://www.kaggle.com/competitions/deepfake-detection-challenge/data) | [arXiv paper](https://arxiv.org/abs/2006.07397)
 
 
 ## References
 
 - [EfficientNet PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
-
+- [ConvNext-Tiny PyTorch](https://pytorch.org/vision/main/models/generated/torchvision.models.convnext_tiny.html)
 
 ## How to cite
 
@@ -97,19 +98,7 @@ Plain text:
 
 ```
 
-## Credits
 
-
-
-## License
-
-Information about the license.
-For more information about he license see the `LICENSE.md` file.
-
-## Changelog
-
-All notable changes to this project will be documented
-in [CHANGELOG.md](https://gitlab.rackhost.hu/rackhost/wp-tudasbazis/-/blob/master/README.md).
 
 
 
@@ -120,9 +109,9 @@ Yoon Hyejun -  [hj021313@gmail.com](hj021313@gmail.com)
 
 Kim Minseo - [iminseo031224@gamil.com](iminseo031224@gmail.com)
 
-Kim  -
+Kim Serin - [qnsghdakf8@gmail.com](qnsghdakf8@gmail.com)
 
-Project Link: link to the project
+Project Link: [link to the project](https://leaf-geography-00e.notion.site/10e21cb154db809fa334d48c83df050e)
 
 ## Acknowledgements
 
