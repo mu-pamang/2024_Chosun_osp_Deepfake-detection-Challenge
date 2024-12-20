@@ -68,7 +68,7 @@ $ ./
 
 
 ## Train
-## Training a single model
+# Training a single model
 
 If you want to train some models without lunching the script:
 
