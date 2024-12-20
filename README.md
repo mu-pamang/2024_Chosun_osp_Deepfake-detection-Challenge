@@ -29,9 +29,9 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 - Python 3.10 64-bit
 - Django 5.1.2
 - EfficientNet b0
-- ConvNext Tiny
-- MTCNN (전처리)
-- BCEWithLogitsLoss (손실 함수)
+- ConvNext-Tiny
+- MTCNN (Preprocessing)
+- BCEWithLogitsLoss (Loss Function)
 
 
 ## Getting Started
@@ -60,7 +60,7 @@ If you just want to test the pre-trained models against your own videos or image
 ## The whole pipeline
 
 ### Pipeline Overview
-- Model: EfficientNet b0, ConvNext Tiny
+- Model: EfficientNet b0, ConvNext-Tiny
 - Preprocessing: MTCNN for face extraction
 - Loss Function: BCEWithLogitsLoss
 ```
