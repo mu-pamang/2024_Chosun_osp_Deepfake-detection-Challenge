@@ -37,7 +37,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 
 Setup description
 
-## Prerequisites
+### Prerequisites
 
 - Install [conda](https://docs.conda.io/en/latest/miniconda.html)
 - Create the  environment with *environment.yml*
@@ -57,7 +57,7 @@ If you just want to test the pre-trained models against your own videos or image
 
 ## The whole pipeline
 
-## Pipeline Overview
+### Pipeline Overview
 - Model: EfficientNet b0, ConvNext Tiny
 - Preprocessing: MTCNN for face extraction
 - Loss Function: BCEWithLogitsLoss
@@ -68,7 +68,7 @@ $ ./
 
 
 ## Train
-# Training a single model
+### Training a single model
 
 If you want to train some models without lunching the script:
 
@@ -76,7 +76,7 @@ If you want to train some models without lunching the script:
   
 ## Test
 
-## Pretrained weights
+### Pretrained weights
 We provide pretrained weights for all the architectures presented in the project. 
 Please refer to this [Google Drive link](https://drive.google.com/drive/folders/1UyjNHiUvE3yQG9Mq9hqvLXkuFlYp3-lq?usp=sharing)
 
