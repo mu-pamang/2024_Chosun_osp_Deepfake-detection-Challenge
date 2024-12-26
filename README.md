@@ -93,17 +93,6 @@ Please refer to this [Google Drive link](https://drive.google.com/drive/folders/
 - [EfficientNet PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
 - [ConvNext-Tiny PyTorch](https://pytorch.org/vision/main/models/generated/torchvision.models.convnext_tiny.html)
 
-## How to cite
-
-Plain text:
-
-```
-
-```
-
-
-
-
 
 ## Contact
 
