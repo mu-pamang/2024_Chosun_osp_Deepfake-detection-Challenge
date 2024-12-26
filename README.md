@@ -103,7 +103,7 @@ Kim Minseo - [iminseo031224@gamil.com](iminseo031224@gmail.com)
 
 Kim Serin - [qnsghdakf8@gmail.com](qnsghdakf8@gmail.com)
 
-Project Link: [link to the project](https://leaf-geography-00e.notion.site/10e21cb154db809fa334d48c83df050e)
+Project Link : [link to the project](https://leaf-geography-00e.notion.site/10e21cb154db809fa334d48c83df050e)
 
 
 ## Acknowledgements
