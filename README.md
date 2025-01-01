@@ -60,7 +60,7 @@ If you just want to test the pre-trained models against your own videos or image
 ## The whole pipeline
 
 ### Pipeline Overview
-- Model: EfficientNet b0, ConvNext-Tiny
+- Model: EfficientNet-b0, ConvNext-Tiny
 - Preprocessing: MTCNN for face extraction
 - Loss Function: BCEWithLogitsLoss
 ```
