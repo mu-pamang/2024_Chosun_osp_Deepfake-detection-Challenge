@@ -28,7 +28,7 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 
 - Python 3.10 64-bit
 - Django 5.1.2
-- EfficientNet b0
+- EfficientNet-b0
 - ConvNext-Tiny
 - MTCNN (Preprocessing)
 - BCEWithLogitsLoss (Loss Function)
