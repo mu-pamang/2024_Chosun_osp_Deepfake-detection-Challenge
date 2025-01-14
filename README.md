@@ -24,6 +24,11 @@ This project is a deepfake detection challenge project conducted by the Chosun U
 이 프로젝트는 조선대학교 오픈소스SW 프로젝트에서 진행되는 딥페이크 탐지 챌린지 프로젝트입니다.
 
 
+#### Webpage Execution
+https://github.com/user-attachments/assets/bded1ac6-318d-4874-a68d-3db3c6154378
+
+
+
 ### Built With
 
 - Python 3.10 64-bit
